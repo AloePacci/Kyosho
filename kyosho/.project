@@ -41,20 +41,5 @@
 			<type>2</type>
 			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/esp32/hardware/esp32/2.0.2/variants/esp32</locationURI>
 		</link>
-		<link>
-			<name>libraries/FS</name>
-			<type>2</type>
-			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/esp32/hardware/esp32/2.0.2/libraries/FS</locationURI>
-		</link>
-		<link>
-			<name>libraries/SD</name>
-			<type>2</type>
-			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/esp32/hardware/esp32/2.0.2/libraries/SD</locationURI>
-		</link>
-		<link>
-			<name>libraries/SPI</name>
-			<type>2</type>
-			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/esp32/hardware/esp32/2.0.2/libraries/SPI</locationURI>
-		</link>
 	</linkedResources>
 </projectDescription>
