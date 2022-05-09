@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>kyosho</name>
+	<name>kiosho2</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -39,12 +39,7 @@
 		<link>
 			<name>core/variant</name>
 			<type>2</type>
-			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/esp32/hardware/esp32/2.0.2/variants/esp32</locationURI>
-		</link>
-		<link>
-			<name>libraries/WiFi</name>
-			<type>2</type>
-			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/esp32/hardware/esp32/2.0.2/libraries/WiFi</locationURI>
+			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/esp32/hardware/esp32/2.0.2/variants/lolin32</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
