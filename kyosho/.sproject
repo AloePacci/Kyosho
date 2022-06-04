@@ -1,5 +1,5 @@
 Config.Release.board.BOARD.ID=esp32cam
-Config.Release.board.BOARD.MENU.CPUFreq=240
+Config.Release.board.BOARD.MENU.CPUFreq=160
 Config.Release.board.BOARD.MENU.FlashFreq=40
 Config.Release.board.BOARD.MENU.FlashMode=dio
 Config.Release.board.BOARD.TXT=${SLOEBER_HOME}/arduinoPlugin/packages/esp32/hardware/esp32/2.0.2/boards.txt

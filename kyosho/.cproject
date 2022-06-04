@@ -22,6 +22,11 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/WiFi/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/ESP32Servo/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/Adafruit_VL53L0X/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/Wire/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/MPU9250_asukiaaa/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/NewPing/src}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.cpp.sketch.input.2031098936" name="CPP source files" superClass="io.sloeber.compiler.cpp.sketch.input"/>
 							</tool>
@@ -30,6 +35,11 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/WiFi/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/ESP32Servo/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/Adafruit_VL53L0X/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/Wire/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/MPU9250_asukiaaa/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/NewPing/src}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.c.sketch.input.2139048852" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>
 							</tool>
@@ -38,6 +48,11 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/WiFi/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/ESP32Servo/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/Adafruit_VL53L0X/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/Wire/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/MPU9250_asukiaaa/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kyosho/libraries/NewPing/src}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.S.sketch.input.280415436" name="Assembly source files" superClass="io.sloeber.compiler.S.sketch.input"/>
 							</tool>
@@ -78,7 +93,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="libraries/?*/**/test*/**|libraries/?*/**/third-party/**|libraries/?*/utility/*/*|downloaded_code|libraries/?*/**/?xamples/**|libraries/?*/**/?xtras/**|libraries/**/._*|pwm_read.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="libraries/Servo/docs|libraries/?*/**/test*/**|libraries/?*/**/third-party/**|libraries/?*/utility/*/*|downloaded_code|libraries/?*/**/?xamples/**|libraries/?*/**/?xtras/**|libraries/**/._*|pwm_read.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

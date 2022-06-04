@@ -1,6 +1,11 @@
 #include "defines.h"
 
 unsigned int pwm;
+//ESC myESC(PWM_WRITE_PIN, 1000, 2000, 1000); // ESC_Name (PIN, Minimum Value, Maximum Value, Arm Value)
+Adafruit_VL53L0X lox = Adafruit_VL53L0X();
+MPU9250_asukiaaa mySensor;
+NewPing sonar(15, 14);
+
 
 //The setup function is called once at startup of the sketch
 void setup()
@@ -8,21 +13,87 @@ void setup()
 	Serial.begin(115200); // to read serial
 	Serial.setDebugOutput(true);
     Serial.println();
-    Serial.println("version 1");
+    Serial.println("version 2");
+    /*Wire.begin(2, 4); //sda, scl
+    if (!lox.begin(VL53L0X_I2C_ADDR, false, &Wire))
+    {
+    Serial.println(F("Failed to boot VL53L0X"));
+    }else
+	Serial.println(F("boot laser distance"));
+    mySensor.setWire(&Wire);
+    mySensor.beginAccel();
+    mySensor.beginMag();
+    Serial.println("boot imu");
+	*/
+    ledcAttachPin(12, 0);
+    ledcSetup(0, 50, 8);
+    //pinMode(CONTROL_PIN1, OUTPUT);
+    //pinMode(CONTROL_PIN2, OUTPUT);
+    pinMode(LED_BUILTIN, OUTPUT);
+    analogWrite(LED_BUILTIN,10);
+    Serial.println("led on");
+    //digitalWrite(LED_BUILTIN, HIGH); // set led to on to indicate arming
+
+    //myESC.arm();
+
+    digitalWrite(PWM_WRITE_PIN, HIGH);
+    delayMicroseconds(1500);
+    digitalWrite(PWM_WRITE_PIN, LOW);
+	Serial.println("arm");
+	delay(1000); // Wait a second
+    analogWrite(LED_BUILTIN,0); // led off to indicate arming completed
+    delay(1000);
+	Serial.println("speed min");
+
 #ifdef USE_CAMERA
     start_camera(); // esta funcion se conecta al wifi y enciende la camara
 #endif
-    configure_pwm(); //esta funcion enciende el PWM y empieza a leer y escribir
+    //configure_pwm(); //esta funcion enciende el PWM y empieza a leer y escribir
 }
 
 // The loop function is called in an endless loop
 void loop()
 {
-	for(int i=0;i<4;i++){
-		vTaskDelay(3000/ portTICK_PERIOD_MS); // delay 3 segundos
-		Serial.println(pwm);
-		mcpwm_set_duty(MCPWM_UNIT_1,MCPWM_TIMER_0,MCPWM_GEN_A, 50+10*i); //68.3%
+	Serial.println("loop start");
+	int i=MIN_SPEED;
+	/*float distance = sonar.ping_median(5);
+	Serial.print("spmar read: ");
+	Serial.print(distance);
+	Serial.println(" cm");
+	VL53L0X_RangingMeasurementData_t measure;
+	lox.rangingTest(&measure, false);*/
+	bool state=false;
+	for (int i = MIN_SPEED; i< (MAX_SPEED-MIN_SPEED)+MIN_SPEED; i++){
+		for(int j = 0;j<50;j++)
+		digitalWrite(PWM_WRITE_PIN, HIGH);
+		delayMicroseconds(i);
+		digitalWrite(PWM_WRITE_PIN, LOW);
+		delay(20000-i); // Wait a second
 	}
+	//myESC.speed(MIN_SPEED);
+	/*
+	if (measure.RangeStatus != 4)
+	{
+	Serial.print("lidar distance saDistance (mm): "); Serial.println(measure.RangeMilliMeter);
+	}
+	else
+	{
+	Serial.println("lidar read failed out of range ");
+	}
+	mySensor.accelUpdate();
+	Serial.println("print accel values");
+	Serial.println("accelX: " + String(mySensor.accelX()));
+	Serial.println("accelY: " + String(mySensor.accelY()));
+	Serial.println("accelZ: " + String(mySensor.accelZ()));
+	Serial.println("accelSqrt: " + String(mySensor.accelSqrt()));
+
+	mySensor.magUpdate();
+	Serial.println("print mag values");
+	Serial.println("magX: " + String(mySensor.magX()));
+	Serial.println("maxY: " + String(mySensor.magY()));
+	Serial.println("magZ: " + String(mySensor.magZ()));
+	Serial.println("horizontal direction: " + String(mySensor.magHorizDirection()));*/
+	delay(100000);
 }
 
 
@@ -193,14 +264,29 @@ void start_camera(){
 
 void configure_pwm(){
 	mcpwm_gpio_init(MCPWM_UNIT_0, MCPWM_CAP_0, PWM_READ_PIN); //PWM read initialized in unit 0 as read
-	mcpwm_gpio_init(MCPWM_UNIT_1, MCPWM1A, PWM_WRITE_PIN); // PWM write initialized in unit 1 as write
+	//mcpwm_gpio_init(MCPWM_UNIT_1, MCPWM1A, PWM_WRITE_PIN); // PWM write initialized in unit 1 as write
 	xTaskCreatePinnedToCore(reader, "PWM_reader", 2048, NULL, 1, NULL, 1); // task for PWM read
-	mcpwm_config_t pwmconfig;
+	/*mcpwm_config_t pwmconfig;
 	pwmconfig.counter_mode=MCPWM_UP_DOWN_COUNTER;
 	pwmconfig.frequency=250;
 	pwmconfig.duty_mode=MCPWM_DUTY_MODE_0;
 	pwmconfig.cmpr_a=90.0;
 	pwmconfig.cmpr_b=80.0;
 	mcpwm_init(MCPWM_UNIT_1,MCPWM_TIMER_0, &pwmconfig);
-	mcpwm_start(MCPWM_UNIT_1,MCPWM_TIMER_0);
+	mcpwm_start(MCPWM_UNIT_1,MCPWM_TIMER_0);*/
 }
+/*
+
+void set_speed(float speed){
+	static bool last =true;
+	int signal=(int) speed;
+	if (speed>0 && last==false){
+		digitalWrite(CONTROL_PIN1, HIGH);//set speed forward
+	}else if (speed <0 && last == true){
+		digitalWrite(CONTROL_PIN1, LOW);//set speed backwards
+	}
+	//myESC.speed(speed); // speed command goes from 0 to 1000
+}*/
+
+
+

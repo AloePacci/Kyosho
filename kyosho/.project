@@ -42,9 +42,34 @@
 			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/esp32/hardware/esp32/2.0.2/variants/esp32</locationURI>
 		</link>
 		<link>
+			<name>libraries/Adafruit_VL53L0X</name>
+			<type>2</type>
+			<locationURI>ECLIPSE_HOME/arduinoPlugin/libraries/Adafruit_VL53L0X/1.2.0</locationURI>
+		</link>
+		<link>
+			<name>libraries/ESP32Servo</name>
+			<type>2</type>
+			<locationURI>ECLIPSE_HOME/arduinoPlugin/libraries/ESP32Servo/0.11.0</locationURI>
+		</link>
+		<link>
+			<name>libraries/MPU9250_asukiaaa</name>
+			<type>2</type>
+			<locationURI>ECLIPSE_HOME/arduinoPlugin/libraries/MPU9250_asukiaaa/1.5.11</locationURI>
+		</link>
+		<link>
+			<name>libraries/NewPing</name>
+			<type>2</type>
+			<locationURI>ECLIPSE_HOME/arduinoPlugin/libraries/NewPing/1.9.4</locationURI>
+		</link>
+		<link>
 			<name>libraries/WiFi</name>
 			<type>2</type>
 			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/esp32/hardware/esp32/2.0.2/libraries/WiFi</locationURI>
+		</link>
+		<link>
+			<name>libraries/Wire</name>
+			<type>2</type>
+			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/esp32/hardware/esp32/2.0.2/libraries/Wire</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
