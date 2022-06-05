@@ -30,15 +30,15 @@ void set_speed(int raw_speed){
 
 void update_rc(){
     //RC read for reference changes
-  if(RC_Throttle > 1800 && (millis()-last_rc_read)>1000){ // increase reference
-    reference+=100; 
+  if(RC_Throttle > 1800 && (millis()-last_rc_read)>1000){ // decrease reference
+    reference-=100; 
     last_rc_read=millis();
     if (reference>MAX_REFERENCE)
       reference=MAX_REFERENCE;/*
     Serial.print(F("inc ref:"));
     Serial.println(reference);*/
-  }else if(RC_Throttle < 1200 && (millis()-last_rc_read)>1000){ // decrease reference
-    reference-=100; 
+  }else if(RC_Throttle < 1200 && (millis()-last_rc_read)>1000){ // increase reference
+    reference+=100; 
     last_rc_read=millis();
     if (reference<MIN_REFERENCE)
       reference=MIN_REFERENCE;/*

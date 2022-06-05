@@ -14,7 +14,7 @@
 #define MAX_SERVO_OUTPUT 1620
 #define MIN_SERVO_OUTPUT 1380
 #define MIN_REFERENCE 100
-#define MAX_REFERENCE 700
+#define MAX_REFERENCE 600
 #define Kp 0.25
 #define Ki 0.2
 #define Kd 0.3
