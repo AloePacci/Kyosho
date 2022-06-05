@@ -1,7 +1,7 @@
 #include "defines.h"
 
 unsigned int pwm;
-//ESC myESC(PWM_WRITE_PIN, 1000, 2000, 1000); // ESC_Name (PIN, Minimum Value, Maximum Value, Arm Value)
+ESC myESC(PWM_WRITE_PIN, 1000, 2000, 1000); // ESC_Name (PIN, Minimum Value, Maximum Value, Arm Value)
 Adafruit_VL53L0X lox = Adafruit_VL53L0X();
 MPU9250_asukiaaa mySensor;
 NewPing sonar(15, 14);
@@ -25,8 +25,7 @@ void setup()
     mySensor.beginMag();
     Serial.println("boot imu");
 	*/
-    ledcAttachPin(12, 0);
-    ledcSetup(0, 50, 8);
+    pinMode(PWM_WRITE_PIN, OUTPUT);
     //pinMode(CONTROL_PIN1, OUTPUT);
     //pinMode(CONTROL_PIN2, OUTPUT);
     pinMode(LED_BUILTIN, OUTPUT);
@@ -34,15 +33,11 @@ void setup()
     Serial.println("led on");
     //digitalWrite(LED_BUILTIN, HIGH); // set led to on to indicate arming
 
-    //myESC.arm();
-
-    digitalWrite(PWM_WRITE_PIN, HIGH);
-    delayMicroseconds(1500);
-    digitalWrite(PWM_WRITE_PIN, LOW);
+    myESC.arm();
 	Serial.println("arm");
-	delay(1000); // Wait a second
+	delay(5000); // Wait a while
     analogWrite(LED_BUILTIN,0); // led off to indicate arming completed
-    delay(1000);
+	myESC.speed(MIN_SPEED); // motor starts up about half way through loop
 	Serial.println("speed min");
 
 #ifdef USE_CAMERA
@@ -63,15 +58,23 @@ void loop()
 	VL53L0X_RangingMeasurementData_t measure;
 	lox.rangingTest(&measure, false);*/
 	bool state=false;
-	for (int i = MIN_SPEED; i< (MAX_SPEED-MIN_SPEED)+MIN_SPEED; i++){
-		for(int j = 0;j<50;j++)
-		digitalWrite(PWM_WRITE_PIN, HIGH);
-		delayMicroseconds(i);
-		digitalWrite(PWM_WRITE_PIN, LOW);
-		delay(20000-i); // Wait a second
+	for (int i = MIN_SPEED+10; i< MAX_SPEED; i++){
+		myESC.speed(i);
+		if (state==true){
+			state=false;
+			analogWrite(LED_BUILTIN,10);
+			Serial.println("on");
+		}else{
+			state=true;
+			analogWrite(LED_BUILTIN,0);
+			Serial.println("off");
+		}
+		delay(50);
 	}
-	//myESC.speed(MIN_SPEED);
+	myESC.speed(MIN_SPEED);
+	delay(500);
 	/*
+
 	if (measure.RangeStatus != 4)
 	{
 	Serial.print("lidar distance saDistance (mm): "); Serial.println(measure.RangeMilliMeter);
@@ -275,7 +278,7 @@ void configure_pwm(){
 	mcpwm_init(MCPWM_UNIT_1,MCPWM_TIMER_0, &pwmconfig);
 	mcpwm_start(MCPWM_UNIT_1,MCPWM_TIMER_0);*/
 }
-/*
+
 
 void set_speed(float speed){
 	static bool last =true;
@@ -285,8 +288,6 @@ void set_speed(float speed){
 	}else if (speed <0 && last == true){
 		digitalWrite(CONTROL_PIN1, LOW);//set speed backwards
 	}
-	//myESC.speed(speed); // speed command goes from 0 to 1000
-}*/
-
-
+	myESC.speed(speed); // speed command goes from 0 to 1000
+}
 
