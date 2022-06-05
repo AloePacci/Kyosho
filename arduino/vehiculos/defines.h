@@ -16,4 +16,4 @@
 #define MIN_REFERENCE 0
 #define MAX_REFERENCE 600
 #define Kp 0.25
-#define Kv 2
+#define Kv 3
