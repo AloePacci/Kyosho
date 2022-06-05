@@ -13,7 +13,7 @@
 #define RC_PIN 2
 #define MAX_SERVO_OUTPUT 1620
 #define MIN_SERVO_OUTPUT 1380
-#define MIN_REFERENCE 100
+#define MIN_REFERENCE 0
 #define MAX_REFERENCE 600
 #define Kp 0.25
 #define Ki 0.2

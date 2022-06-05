@@ -6,7 +6,7 @@ volatile float RC_Throttle=1500, last=0; // for rc storing and filtering
 volatile long Throttle_HIGH_us, last_rc_read=0; // for rc read
 Adafruit_VL53L0X lox = Adafruit_VL53L0X(); //sensor distance object
 float raw_distance, distance, l_distance=0;
-float reference=100; //initial reference 100 = 0.1meter
+int reference=100; //initial reference 100 = 0.1meter
 #ifdef LOG
 volatile long last_log=0;
 #endif
@@ -18,6 +18,7 @@ void setup() {
  Serial.begin(9600);
  // Interrupción para canal Thrtottle
  pinMode(RC_PIN, INPUT_PULLUP);
+ pinMode(13,OUTPUT); //builtin led
  enableInterrupt(RC_PIN, INT_Throttle, CHANGE);
    
  //enable distance reader
@@ -44,24 +45,31 @@ void loop() {
       l_distance=distance;
     }else{
     distance = 700 * 0.65 + 0.35 * l_distance ;
+    l_distance=distance;
     }
   } 
   bool obstacle=false;
-  if (distance<600)
+  if (distance<600){
      obstacle=true;
+     digitalWrite(13,HIGH);
+  } else
+    digitalWrite(13,LOW);
   
   update_rc(); // change ref if neccesaryç
   if(reference>100){
     if(obstacle==true){
        motor_speed=controller(reference-distance); 
     }else
-      motor_speed=-reference*0.14+1450;
+      motor_speed=(reference-200)*0.14+1520;
+  }
+  else if(reference==100){
+    motor_speed=1500;
   }
   else
-    motor_speed=1500;
+    motor_speed=1430;
 
-  if(motor_speed<(-reference*0.14+1450)){
-    motor_speed=-reference*0.14+1450;
+  if((motor_speed>((reference-200)*0.14+1520)) && (reference>100)){
+    motor_speed=(reference-200)*0.14+1520;
   }
   //saturate outputs
   if(motor_speed < MIN_SERVO_OUTPUT)

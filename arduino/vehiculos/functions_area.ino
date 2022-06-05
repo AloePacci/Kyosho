@@ -19,9 +19,9 @@ int controller(int error){
 void set_speed(int raw_speed){
   int motor_speed;
   if(raw_speed>1510){ //avoid dead zone
-    motor_speed=map(raw_speed,1500,1650,1580,1650);
+    motor_speed=map(raw_speed,1500,1650,1550,1650);
   }else if(raw_speed<1490){
-    motor_speed=map(raw_speed,1500,1350,1470,1350);
+    motor_speed=map(raw_speed,1500,1350,1450,1350);
   }else
     motor_speed=1500; //keep vehicle still
   servo.writeMicroseconds(motor_speed); 
@@ -33,15 +33,15 @@ void update_rc(){
   if(RC_Throttle > 1800 && (millis()-last_rc_read)>1000){ // decrease reference
     reference-=100; 
     last_rc_read=millis();
-    if (reference>MAX_REFERENCE)
-      reference=MAX_REFERENCE;/*
+    if (reference<MIN_REFERENCE)
+      reference=MIN_REFERENCE;/*
     Serial.print(F("inc ref:"));
     Serial.println(reference);*/
   }else if(RC_Throttle < 1200 && (millis()-last_rc_read)>1000){ // increase reference
     reference+=100; 
     last_rc_read=millis();
-    if (reference<MIN_REFERENCE)
-      reference=MIN_REFERENCE;/*
+    if (reference>MAX_REFERENCE)
+      reference=MAX_REFERENCE;/*
     Serial.print(F("dec ref:"));
     Serial.println(reference);*/
   }
