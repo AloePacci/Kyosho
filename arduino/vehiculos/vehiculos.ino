@@ -6,7 +6,7 @@ volatile float RC_Throttle=1500, last=0; // for rc storing and filtering
 volatile long Throttle_HIGH_us, last_rc_read=0; // for rc read
 Adafruit_VL53L0X lox = Adafruit_VL53L0X(); //sensor distance object
 float distance;
-float reference=500; //initial reference = 1meter
+float reference=500; //initial reference 1000 = 1meter
 #ifdef LOG
 volatile long last_log=0;
 #endif

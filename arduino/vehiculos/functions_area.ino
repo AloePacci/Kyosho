@@ -11,7 +11,7 @@ void INT_Throttle() { //executed interruption rc read
 }
 
 int controller(int error){
-  return Kp*error;
+  return 1500-Kp*error;
   }
 
 
