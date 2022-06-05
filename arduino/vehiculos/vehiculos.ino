@@ -5,8 +5,8 @@ int motor_speed = 1500; //pwm value to input
 volatile float RC_Throttle=1500, last=0; // for rc storing and filtering
 volatile long Throttle_HIGH_us, last_rc_read=0; // for rc read
 Adafruit_VL53L0X lox = Adafruit_VL53L0X(); //sensor distance object
-float distance;
-float reference=500; //initial reference 1000 = 1meter
+float raw_distance, distance, l_distance=0;
+float reference=300; //initial reference 1000 = 1meter
 #ifdef LOG
 volatile long last_log=0;
 #endif
@@ -39,11 +39,20 @@ void loop() {
   
   if (lox.isRangeComplete()) //read sensor
   {
-    distance = lox.readRange();
+    raw_distance = lox.readRange();
+    if (raw_distance<700){
+      distance = raw_distance * 0.65 + 0.35 * l_distance ;
+      l_distance=distance;
+    }else{
+    distance = 700 * 0.65 + 0.35 * l_distance ;
+    }
   } 
   
-  update_rc(); // change ref if neccesary
-  motor_speed=controller(reference-distance);
+  update_rc(); // change ref if neccesaryç
+  if(reference<700)
+    motor_speed=controller(reference-distance);
+  else
+    motor_speed=1500;
   
   //saturate outputs
   if(motor_speed < MIN_SERVO_OUTPUT)
@@ -60,6 +69,8 @@ void loop() {
   #ifdef LOG
   if (millis()-last_log>100){
   Serial.print(reference);
+  Serial.print(",");
+  Serial.print(raw_distance);
   Serial.print(",");
   Serial.print(distance);
   Serial.print(",");
