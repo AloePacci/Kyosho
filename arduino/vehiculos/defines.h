@@ -12,8 +12,8 @@
 #define MOTOR_PIN 3
 #define RC_PIN 2
 #define MAX_SERVO_OUTPUT 1620
-#define MIN_SERVO_OUTPUT 1380
+#define MIN_SERVO_OUTPUT 1300
 #define MIN_REFERENCE 0
 #define MAX_REFERENCE 600
 #define Kp 0.25
-#define Kv 1
+#define Kv 2
