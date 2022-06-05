@@ -11,9 +11,11 @@ void INT_Throttle() { //executed interruption rc read
 }
 
 int controller(int error){
-  static float last_time=0;
-  return 1500-Kp*error;
-  last_time=millis();
+  float vel=0;
+  if(distance-l_distance<0){
+    vel=(distance-l_distance)*Kv;
+  }
+  return 1500-Kp*error+vel;
   }
 
 void set_speed(int raw_speed){
