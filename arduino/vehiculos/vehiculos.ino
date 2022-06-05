@@ -49,8 +49,9 @@ void loop() {
   } 
   
   update_rc(); // change ref if neccesaryç
-  if(reference<700)
-    motor_speed=controller(reference-distance);
+  if(reference>100){
+      motor_speed=controller(reference-distance);
+  }
   else
     motor_speed=1500;
   
@@ -62,9 +63,12 @@ void loop() {
   else if(motor_speed > MAX_SERVO_OUTPUT)
   {
     motor_speed=MAX_SERVO_OUTPUT;
+  }else if(motor_speed<(-reference*0.14+1450)){
+    motor_speed=-reference*0.14+1450;
   }
+
+  set_speed(motor_speed);// Send signal to ESC.
   
-  servo.writeMicroseconds(motor_speed); // Send signal to ESC.
 
   #ifdef LOG
   if (millis()-last_log>100){

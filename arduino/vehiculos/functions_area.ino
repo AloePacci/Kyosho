@@ -11,8 +11,21 @@ void INT_Throttle() { //executed interruption rc read
 }
 
 int controller(int error){
+  static float last_time=0;
   return 1500-Kp*error;
+  last_time=millis();
   }
+
+void set_speed(int raw_speed){
+  int motor_speed;
+  if(raw_speed>1510){ //avoid dead zone
+    motor_speed=map(raw_speed,1500,1650,1580,1650);
+  }else if(raw_speed<1490){
+    motor_speed=map(raw_speed,1500,1350,1470,1350);
+  }else
+    motor_speed=1500; //keep vehicle still
+  servo.writeMicroseconds(motor_speed); 
+}
 
 
 void update_rc(){
